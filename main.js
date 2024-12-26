@@ -6,6 +6,14 @@ const api = {
 const searchbox = document.querySelector('.search-box');
 searchbox.addEventListener('keypress', setQuery);
 
+const url = new URL(window.location.href);
+const params = url.searchParams;
+const city = params.get('city');
+if (city != undefined) {
+  searchbox.value = city;
+  getResults(city);
+}
+
 function setQuery(evt) {
   if (evt.keyCode == 13) {
     getResults(searchbox.value);
@@ -48,3 +56,4 @@ function dateBuilder (d) {
 
   return `${day} ${date} ${month} ${year}`;
 }
+
